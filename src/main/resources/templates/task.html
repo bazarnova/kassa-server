@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+<h1>Result</h1>
+<p th:text="'id: ' + ${newtask.id}"/>
+
+<p th:text="'Finish date: ' + ${newtask.finishDate}"/>
+<p th:text="'content: ' + ${newtask.content}"/>
+<p th:text="'status: ' + ${newtask.status}"/>
+<a href="/newtask">Submit another message</a>
+</body>
+</html>
