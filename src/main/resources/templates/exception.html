@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+<h1>Exception</h1>
+<p th:text="'id: ' + ${except}"/>
+
+<a href="/newtask">New task</a>
+<a th:href="@{/tasklist}">
+    <p><input type="button" value="Tasklist"/></p>
+</a>
+</body>
+</html>
