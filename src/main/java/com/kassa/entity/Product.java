@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class Product {
     private Long id;
-    private String name;
+    private String productName;
     private Integer amount;
     private Integer account;
     private BigDecimal weight;
@@ -13,7 +13,7 @@ public class Product {
 
     public Product(Builder builder) {
         this.id = builder.id;
-        this.name = builder.name;
+        this.productName = builder.productName;
         this.amount = builder.amount;
         this.account = builder.account;
         this.weight = builder.weight;
@@ -24,9 +24,9 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String name, Integer amount, Integer account, BigDecimal weight, Long check_id, String comment) {
+    public Product(Long id, String productName, Integer amount, Integer account, BigDecimal weight, Long check_id, String comment) {
         this.id = id;
-        this.name = name;
+        this.productName = productName;
         this.amount = amount;
         this.account = account;
         this.weight = weight;
@@ -42,12 +42,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public Integer getAmount() {
@@ -92,7 +92,7 @@ public class Product {
 
     public static class Builder {
         Long id;
-        String name;
+        String productName;
         Integer amount;
         Integer account;
         BigDecimal weight;
@@ -104,8 +104,8 @@ public class Product {
             return this;
         }
 
-        public Builder setName(String name) {
-            this.name = name;
+        public Builder setProductName(String productName) {
+            this.productName = productName;
             return this;
         }
 

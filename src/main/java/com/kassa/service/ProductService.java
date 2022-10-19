@@ -19,7 +19,7 @@ public class ProductService implements IProductService {
     public Product addNewProduct(Product product) {
         ProductDTO productDTO = new ProductDTO.Builder()
                 .setId(product.getId())
-                .setName(product.getName())
+                .setName(product.getProductName())
                 .setAmount(product.getAmount())
                 .setAccount(product.getAccount())
                 .setWeight(product.getWeight())
@@ -40,7 +40,26 @@ public class ProductService implements IProductService {
         for (ProductDTO productDTO : productDTOS) {
             Product product = new Product.Builder()
                     .setId(productDTO.getId())
-                    .setName(productDTO.getProductName())
+                    .setProductName(productDTO.getProductName())
+                    .setAmount(productDTO.getAmount())
+                    .setAccount(productDTO.getAmount())
+                    .setWeight(productDTO.getWeight())
+                    .setCheck_id(productDTO.getCheckId())
+                    .setComment(productDTO.getDescription())
+                    .build();
+            products.add(product);
+        }
+        return products;
+    }
+    @Override
+    public List<Product> getProductsByName(String productName) {
+
+        List<Product> products = new ArrayList<>();
+        List<ProductDTO> productDTOS = productMapper.getProductsByName(productName);
+        for (ProductDTO productDTO : productDTOS) {
+            Product product = new Product.Builder()
+                    .setId(productDTO.getId())
+                    .setProductName(productDTO.getProductName())
                     .setAmount(productDTO.getAmount())
                     .setAccount(productDTO.getAmount())
                     .setWeight(productDTO.getWeight())

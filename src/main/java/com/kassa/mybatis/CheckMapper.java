@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Mapper
@@ -25,4 +26,13 @@ public interface CheckMapper {
             "  \"COMMENT\" as comment \n" +
             " FROM kassa.checks")
     List<CheckDTO> getAllChecks();
+
+    @Select("SELECT \n" +
+            "  \"ID\" as id, \n" +
+            "  \"SUM_AMOUNT\" as sumAmount, \n" +
+            "  \"DATE\" as date, \n" +
+            "  \"SHOP_NAME\" as shopName, \n" +
+            "  \"COMMENT\" as comment \n" +
+            " FROM kassa.checks WHERE \"DATE\" = #{date}")
+    List<CheckDTO> getChecksByDate(LocalDate date);
 }

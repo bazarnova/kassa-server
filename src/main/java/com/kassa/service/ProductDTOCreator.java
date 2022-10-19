@@ -10,7 +10,7 @@ public interface ProductDTOCreator {
     static ProductDTO from(Product product) {
         return new ProductDTO.Builder()
                 .setId(product.getId())
-                .setName(product.getName())
+                .setName(product.getProductName())
                 .setAmount(product.getAmount())
                 .build();
     }

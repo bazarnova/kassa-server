@@ -18,14 +18,20 @@ public class CheckController {
     @GetMapping(value = "/checks")
     @ResponseBody
     public List<Check> checkList() {
-        List<Check> list = checkService.getAllChecks();
-        return list;
+        return checkService.getAllChecks();
     }
 
-    @PostMapping(value = "/checks",
+    @GetMapping(value = "/checks/{date}")
+    @ResponseBody
+    public List<Check> getChecksByDate(@PathVariable String date) {
+        return checkService.getChecksByDate(Long.parseLong(date));
+    }
+
+    @PostMapping(value = "/check",
             consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseBody
     public Check addCheck(@RequestBody Check check) {
         return  checkService.addNewCheck(check);
     }
+
 }

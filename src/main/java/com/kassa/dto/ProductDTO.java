@@ -24,9 +24,9 @@ public class ProductDTO {
     public ProductDTO() {
     }
 
-    public ProductDTO(Long id, String name, Integer amount, Integer account, BigDecimal weight, Long checkId, String description) {
+    public ProductDTO(Long id, String productName, Integer amount, Integer account, BigDecimal weight, Long checkId, String description) {
         this.id = id;
-        this.productName = name;
+        this.productName = productName;
         this.amount = amount;
         this.account = account;
         this.weight = weight;

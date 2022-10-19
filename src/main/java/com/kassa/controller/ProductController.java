@@ -18,17 +18,20 @@ public class ProductController {
     @GetMapping(value = "/products")
     @ResponseBody
     public List<Product> productList() {
-        List<Product> list = productService.getAllProducts();
-        return list;
+        return productService.getAllProducts();
     }
 
-    @PostMapping(value = "/products",
+    @GetMapping(value = "/products/{name}")
+    @ResponseBody
+    public List<Product> getProductsByName(@PathVariable String name){
+        return productService.getProductsByName(name);
+    }
+
+    @PostMapping(value = "/product",
             consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseBody
     public Product addProduct(@RequestBody Product product) {
-
         return productService.addNewProduct(product);
-
     }
 
 }

@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
-public class ToDoListApplication {
+public class KassaServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ToDoListApplication.class, args);
+        SpringApplication.run(KassaServerApplication.class, args);
     }
 }

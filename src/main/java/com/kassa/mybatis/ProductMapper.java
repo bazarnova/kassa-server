@@ -27,4 +27,15 @@ public interface ProductMapper {
             "  \"DESCRIPTION\" as description  \n" +
             " FROM kassa.product  ")
     List<ProductDTO> getAllProducts();
+
+    @Select("SELECT \n" +
+            "  \"PRODUCT_NAME\" as productName, \n" +
+            "  \"AMOUNT\" as amount, \n" +
+            "  \"ACCOUNT\" as account, \n" +
+            "  \"WEIGHT\" as weight,  \n" +
+            "  \"CHECK_ID\" as checkId, \n" +
+            "  \"PRODUCT_ID\" as id, \n" +
+            "  \"DESCRIPTION\" as description  \n" +
+            " FROM kassa.product WHERE \"PRODUCT_NAME\" = #{productName} ")
+    List<ProductDTO> getProductsByName(String productName);
 }
