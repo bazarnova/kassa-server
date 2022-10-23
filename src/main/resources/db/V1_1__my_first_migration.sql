@@ -10,7 +10,7 @@ CREATE TABLE kassa.product (
     "DESCRIPTION" character varying(1000)
 );
 
-ALTER TABLE kassa.product OWNER TO postgres;
+-- ALTER TABLE kassa.product OWNER TO postgres;
 
 CREATE SEQUENCE kassa."product_IDD_seq"
     START WITH 1
@@ -19,7 +19,7 @@ CREATE SEQUENCE kassa."product_IDD_seq"
     NO MAXVALUE
     CACHE 1;
 
-ALTER TABLE kassa."product_IDD_seq" OWNER TO postgres;
+-- ALTER TABLE kassa."product_IDD_seq" OWNER TO postgres;
 
 ALTER SEQUENCE kassa."product_IDD_seq" OWNED BY kassa.product."PRODUCT_ID";
 
@@ -36,7 +36,7 @@ CREATE TABLE kassa.checks (
     "SHOP_NAME" character varying(1000),
     "COMMENT" character varying(1000)
 );
-ALTER TABLE kassa.checks OWNER TO postgres;
+-- ALTER TABLE kassa.checks OWNER TO postgres;
 
 CREATE SEQUENCE kassa."checks_ID_seq"
     START WITH 1
@@ -45,7 +45,7 @@ CREATE SEQUENCE kassa."checks_ID_seq"
     NO MAXVALUE
     CACHE 1;
 
-ALTER TABLE kassa."checks_ID_seq" OWNER TO postgres;
+-- ALTER TABLE kassa."checks_ID_seq" OWNER TO postgres;
 
 ALTER SEQUENCE kassa."checks_ID_seq" OWNED BY kassa.checks."ID";
 
