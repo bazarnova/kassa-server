@@ -5,8 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-//@PropertySource("db.properties")
-@ConfigurationProperties(prefix = "mybatis.db")
+@ConfigurationProperties(prefix = "spring.flyway")
 public class DBProperties {
     private String schemas;
     private String user;

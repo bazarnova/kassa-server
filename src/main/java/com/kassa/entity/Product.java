@@ -1,6 +1,7 @@
 package com.kassa.entity;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Product {
     private Long id;
@@ -137,5 +138,23 @@ public class Product {
         public Product build() {
             return new Product(this);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(productName, product.productName) &&
+                Objects.equals(amount, product.amount) &&
+                Objects.equals(account, product.account) &&
+                Objects.equals(weight, product.weight) &&
+                Objects.equals(check_id, product.check_id) &&
+                Objects.equals(comment, product.comment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productName, amount, account, weight, check_id, comment);
     }
 }

@@ -2,6 +2,7 @@ package com.kassa.controller;
 
 import com.kassa.entity.Product;
 import com.kassa.service.IProductService;
+import com.kassa.service.ProductListWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +24,8 @@ public class ProductController {
 
     @GetMapping(value = "/products/{name}")
     @ResponseBody
-    public List<Product> getProductsByName(@PathVariable String name){
-        return productService.getProductsByName(name);
+    public ProductListWrapper getProductsByName(@PathVariable String name) {
+        return new ProductListWrapper(productService.getProductsByName(name));
     }
 
     @PostMapping(value = "/product",

@@ -1,9 +1,11 @@
 package com.kassa.entity;
 
+import java.time.LocalDate;
+
 public class Check {
     private Long id;
     private Double sumAmount;
-    private Long date;
+    private LocalDate date;
     private String shopName;
     private String comment;
 
@@ -18,7 +20,7 @@ public class Check {
     public Check() {
     }
 
-    public Check(Long id, Double sumAmount, Long date, String shopName, String comment) {
+    public Check(Long id, Double sumAmount, LocalDate date, String shopName, String comment) {
         this.id = id;
         this.sumAmount = sumAmount;
         this.date = date;
@@ -58,18 +60,18 @@ public class Check {
         this.comment = comment;
     }
 
-    public Long getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Long date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
     public static class Builder {
         Long id;
         Double sumAmount;
-        Long date;
+        LocalDate date;
         String shopName;
         String comment;
 
@@ -83,7 +85,7 @@ public class Check {
             return this;
         }
 
-        public Builder setDate(Long date) {
+        public Builder setDate(LocalDate date) {
             this.date = date;
             return this;
         }

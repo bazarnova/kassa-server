@@ -2,7 +2,7 @@ package com.kassa.service;
 
 import com.kassa.dto.ProductDTO;
 import com.kassa.entity.Product;
-import com.kassa.mybatis.ProductMapper;
+import com.kassa.flyway.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,7 +61,7 @@ public class ProductService implements IProductService {
                     .setId(productDTO.getId())
                     .setProductName(productDTO.getProductName())
                     .setAmount(productDTO.getAmount())
-                    .setAccount(productDTO.getAmount())
+                    .setAccount(productDTO.getAccount())
                     .setWeight(productDTO.getWeight())
                     .setCheck_id(productDTO.getCheckId())
                     .setComment(productDTO.getDescription())

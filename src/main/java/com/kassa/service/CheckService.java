@@ -2,13 +2,11 @@ package com.kassa.service;
 
 import com.kassa.dto.CheckDTO;
 import com.kassa.entity.Check;
-import com.kassa.mybatis.CheckMapper;
+import com.kassa.flyway.CheckMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class CheckService implements ICheckService {
     public Check addNewCheck(Check check) {
 
         CheckDTO checkDTO = new CheckDTO.Builder()
-                .setDate(Instant.ofEpochMilli(check.getDate()).atZone(ZoneId.systemDefault()).toLocalDate())
+                .setDate(check.getDate())
                 .setSumAmount(check.getSumAmount())
                 .setShopName(check.getShopName())
                 .setComment(check.getComment())
@@ -39,7 +37,7 @@ public class CheckService implements ICheckService {
         List<Check> checks = new ArrayList<>();
         List<CheckDTO> checkDTOS = checkMapper.getAllChecks();
         for (CheckDTO checkDTO : checkDTOS) {
-            Long date = checkDTO.getDate() == null ? 0 : checkDTO.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant().getEpochSecond();
+            LocalDate date = checkDTO.getDate() == null ? null : checkDTO.getDate();
             Check check = new Check.Builder()
                     .setId(checkDTO.getId())
                     .setDate(date)
@@ -53,16 +51,14 @@ public class CheckService implements ICheckService {
     }
 
     @Override
-    public List<Check> getChecksByDate(Long date) {
+    public List<Check> getChecksByDate(LocalDate date) {
 
         List<Check> checks = new ArrayList<>();
-        LocalDate localDate = Instant.ofEpochMilli(date).atZone(ZoneId.systemDefault()).toLocalDate();
-        List<CheckDTO> checkDTOS = checkMapper.getChecksByDate(localDate);
+        List<CheckDTO> checkDTOS = checkMapper.getChecksByDate(date);
         for (CheckDTO checkDTO : checkDTOS) {
-            Long checkDate = checkDTO.getDate() == null ? 0 : checkDTO.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant().getEpochSecond();
             Check check = new Check.Builder()
                     .setId(checkDTO.getId())
-                    .setDate(checkDate)
+                    .setDate(checkDTO.getDate())
                     .setSumAmount(checkDTO.getSumAmount())
                     .setShopName(checkDTO.getShopName())
                     .setComment(checkDTO.getComment())

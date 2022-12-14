@@ -1,10 +1,14 @@
 package com.kassa.controller;
 
 import com.kassa.entity.Check;
+import com.kassa.service.CheckListWrapper;
 import com.kassa.service.ICheckService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -12,8 +16,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 public class CheckController {
 
-    @Autowired
-    private ICheckService checkService;
+    private final ICheckService checkService;
+
+    public CheckController(ICheckService checkService) {
+        this.checkService = checkService;
+    }
 
     @GetMapping(value = "/checks")
     @ResponseBody
@@ -23,8 +30,9 @@ public class CheckController {
 
     @GetMapping(value = "/checks/{date}")
     @ResponseBody
-    public List<Check> getChecksByDate(@PathVariable String date) {
-        return checkService.getChecksByDate(Long.parseLong(date));
+    public ResponseEntity<CheckListWrapper> getChecksByDate(@PathVariable String date) {
+        CheckListWrapper checkListWrapper = new CheckListWrapper(checkService.getChecksByDate(LocalDate.parse(date)));
+        return new ResponseEntity<>(checkListWrapper, HttpStatus.OK);
     }
 
     @PostMapping(value = "/check",

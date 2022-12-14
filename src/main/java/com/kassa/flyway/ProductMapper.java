@@ -1,4 +1,4 @@
-package com.kassa.mybatis;
+package com.kassa.flyway;
 
 import com.kassa.dto.ProductDTO;
 import org.apache.ibatis.annotations.Insert;
