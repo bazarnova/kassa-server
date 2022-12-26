@@ -17,7 +17,7 @@ public class ProductDTO {
         this.account = builder.account;
         this.amount = builder.amount;
         this.weight = builder.weight;
-        this.checkId = builder.check_id;
+        this.checkId = builder.checkId;
         this.description = builder.description;
     }
 
@@ -96,7 +96,7 @@ public class ProductDTO {
         Integer amount;
         Integer account;
         BigDecimal weight;
-        Long check_id;
+        Long checkId;
         String description;
 
         public Builder setId(Long id) {
@@ -124,8 +124,8 @@ public class ProductDTO {
             return this;
         }
 
-        public Builder setCheck_id(Long check_id) {
-            this.check_id = check_id;
+        public Builder setCheckId(Long checkId) {
+            this.checkId = checkId;
             return this;
         }
 

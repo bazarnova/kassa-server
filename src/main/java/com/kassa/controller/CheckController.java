@@ -4,6 +4,7 @@ import com.kassa.entity.Check;
 import com.kassa.service.CheckListWrapper;
 import com.kassa.service.ICheckService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 public class CheckController {
+
+    @Autowired
+    ApplicationContext applicationContext;
 
     private final ICheckService checkService;
 

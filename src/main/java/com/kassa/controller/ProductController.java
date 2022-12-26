@@ -22,7 +22,7 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @GetMapping(value = "/products/{name}")
+    @GetMapping(value = "/products/name/{name}")
     @ResponseBody
     public ProductListWrapper getProductsByName(@PathVariable String name) {
         return new ProductListWrapper(productService.getProductsByName(name));
@@ -35,4 +35,19 @@ public class ProductController {
         return productService.addNewProduct(product);
     }
 
+    @GetMapping(value = "/products/id/{checkId}")
+    @ResponseBody
+    public List<Product> getProductsByName(@PathVariable("checkId") Long checkId) {
+        return productService.getProductsByCheckId(checkId);
+    }
+    @GetMapping(value = "/product/id/{id}")
+    @ResponseBody
+    public Product getProductById(@PathVariable("id") Long id) {
+        return productService.getProductById(id);
+    }
+    @DeleteMapping(value = "/product/id/{id}")
+    @ResponseBody
+    public boolean deleteProduct(@PathVariable("id") Long id) {
+        return productService.deleteProduct(id);
+    }
 }

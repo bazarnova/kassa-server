@@ -23,7 +23,7 @@ public class ProductService implements IProductService {
                 .setAmount(product.getAmount())
                 .setAccount(product.getAccount())
                 .setWeight(product.getWeight())
-                .setCheck_id(product.getCheck_id())
+                .setCheckId(product.getCheckId())
                 .setDescription(product.getComment())
                 .build();
 
@@ -44,7 +44,7 @@ public class ProductService implements IProductService {
                     .setAmount(productDTO.getAmount())
                     .setAccount(productDTO.getAmount())
                     .setWeight(productDTO.getWeight())
-                    .setCheck_id(productDTO.getCheckId())
+                    .setCheckId(productDTO.getCheckId())
                     .setComment(productDTO.getDescription())
                     .build();
             products.add(product);
@@ -63,11 +63,45 @@ public class ProductService implements IProductService {
                     .setAmount(productDTO.getAmount())
                     .setAccount(productDTO.getAccount())
                     .setWeight(productDTO.getWeight())
-                    .setCheck_id(productDTO.getCheckId())
+                    .setCheckId(productDTO.getCheckId())
                     .setComment(productDTO.getDescription())
                     .build();
             products.add(product);
         }
         return products;
+    }
+
+    public List<Product> getProductsByCheckId(Long checkId){
+        List<Product> products = new ArrayList<>();
+        List<ProductDTO> productDTOS = productMapper.getProductsByCheckId(checkId);
+        for (ProductDTO productDTO : productDTOS) {
+            Product product = new Product.Builder()
+                    .setId(productDTO.getId())
+                    .setProductName(productDTO.getProductName())
+                    .setAmount(productDTO.getAmount())
+                    .setAccount(productDTO.getAccount())
+                    .setWeight(productDTO.getWeight())
+                    .setCheckId(productDTO.getCheckId())
+                    .setComment(productDTO.getDescription())
+                    .build();
+            products.add(product);
+        }
+        return products;
+    }
+    public Product getProductById(Long id) {
+        ProductDTO productDTO = productMapper.getProductById(id);
+        return new Product.Builder()
+                .setId(productDTO.getId())
+                .setProductName(productDTO.getProductName())
+                .setAmount(productDTO.getAmount())
+                .setAccount(productDTO.getAccount())
+                .setWeight(productDTO.getWeight())
+                .setCheckId(productDTO.getCheckId())
+                .setComment(productDTO.getDescription())
+                .build();
+    }
+    public boolean deleteProduct(Long id){
+        int number = productMapper.deleteProduct(id);
+        return number > 0;
     }
 }
