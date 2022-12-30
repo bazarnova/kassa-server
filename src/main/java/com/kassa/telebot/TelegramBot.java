@@ -55,12 +55,12 @@ public class TelegramBot extends TelegramLongPollingBot {
                 String path = "D:\\telebot" + "/" + localDate + "/" + photo.getFileId() + ".jpg";
                 downloadFile(filePath, new File(path));
 
-                Photo newPhoto = new Photo.Builder()
-                        .setFileId(photo.getFileId())
-                        .setMessageDate(localDate)
-                        .setAddedDate(LocalDate.now())
-                        .setProcessed(false)
-                        .setPath(path)
+                Photo newPhoto = Photo.builder()
+                        .fileId(photo.getFileId())
+                        .messageDate(localDate)
+                        .addedDate(LocalDate.now())
+                        .processed(false)
+                        .path(path)
                         .build();
                 photoService.addPhoto(newPhoto);
 

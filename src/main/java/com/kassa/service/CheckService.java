@@ -19,11 +19,11 @@ public class CheckService implements ICheckService {
     @Override
     public Check addNewCheck(Check check) {
 
-        CheckDTO checkDTO = new CheckDTO.Builder()
-                .setDate(check.getDate())
-                .setSumAmount(check.getSumAmount())
-                .setShopName(check.getShopName())
-                .setComment(check.getComment())
+        CheckDTO checkDTO = CheckDTO.builder()
+                .date(check.getDate())
+                .sumAmount(check.getSumAmount())
+                .shopName(check.getShopName())
+                .comment(check.getComment())
                 .build();
 
         checkMapper.addCheck(checkDTO);
@@ -38,12 +38,12 @@ public class CheckService implements ICheckService {
         List<CheckDTO> checkDTOS = checkMapper.getAllChecks();
         for (CheckDTO checkDTO : checkDTOS) {
             LocalDate date = checkDTO.getDate() == null ? null : checkDTO.getDate();
-            Check check = new Check.Builder()
-                    .setId(checkDTO.getId())
-                    .setDate(date)
-                    .setSumAmount(checkDTO.getSumAmount())
-                    .setShopName(checkDTO.getShopName())
-                    .setComment(checkDTO.getComment())
+            Check check = Check.builder()
+                    .id(checkDTO.getId())
+                    .date(date)
+                    .sumAmount(checkDTO.getSumAmount())
+                    .shopName(checkDTO.getShopName())
+                    .comment(checkDTO.getComment())
                     .build();
             checks.add(check);
         }
@@ -56,12 +56,12 @@ public class CheckService implements ICheckService {
         List<Check> checks = new ArrayList<>();
         List<CheckDTO> checkDTOS = checkMapper.getChecksByDate(date);
         for (CheckDTO checkDTO : checkDTOS) {
-            Check check = new Check.Builder()
-                    .setId(checkDTO.getId())
-                    .setDate(checkDTO.getDate())
-                    .setSumAmount(checkDTO.getSumAmount())
-                    .setShopName(checkDTO.getShopName())
-                    .setComment(checkDTO.getComment())
+            Check check = Check.builder()
+                    .id(checkDTO.getId())
+                    .date(checkDTO.getDate())
+                    .sumAmount(checkDTO.getSumAmount())
+                    .shopName(checkDTO.getShopName())
+                    .comment(checkDTO.getComment())
                     .build();
             checks.add(check);
         }

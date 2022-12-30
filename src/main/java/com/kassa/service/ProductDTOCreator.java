@@ -8,10 +8,10 @@ public interface ProductDTOCreator {
     ProductDTO converter(Product product);
 
     static ProductDTO from(Product product) {
-        return new ProductDTO.Builder()
-                .setId(product.getId())
-                .setName(product.getProductName())
-                .setAmount(product.getAmount())
+        return ProductDTO.builder()
+                .id(product.getId())
+                .productName(product.getProductName())
+                .amount(product.getAmount())
                 .build();
     }
 }

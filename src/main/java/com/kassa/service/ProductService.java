@@ -17,14 +17,14 @@ public class ProductService implements IProductService {
 
     @Override
     public Product addNewProduct(Product product) {
-        ProductDTO productDTO = new ProductDTO.Builder()
-                .setId(product.getId())
-                .setName(product.getProductName())
-                .setAmount(product.getAmount())
-                .setAccount(product.getAccount())
-                .setWeight(product.getWeight())
-                .setCheckId(product.getCheckId())
-                .setDescription(product.getComment())
+        ProductDTO productDTO = ProductDTO.builder()
+                .id(product.getId())
+                .productName(product.getProductName())
+                .amount(product.getAmount())
+                .account(product.getAccount())
+                .weight(product.getWeight())
+                .checkId(product.getCheckId())
+                .description(product.getComment())
                 .build();
 
         productMapper.addProduct(productDTO);
@@ -38,14 +38,14 @@ public class ProductService implements IProductService {
         List<Product> products = new ArrayList<>();
         List<ProductDTO> productDTOS = productMapper.getAllProducts();
         for (ProductDTO productDTO : productDTOS) {
-            Product product = new Product.Builder()
-                    .setId(productDTO.getId())
-                    .setProductName(productDTO.getProductName())
-                    .setAmount(productDTO.getAmount())
-                    .setAccount(productDTO.getAmount())
-                    .setWeight(productDTO.getWeight())
-                    .setCheckId(productDTO.getCheckId())
-                    .setComment(productDTO.getDescription())
+            Product product = Product.builder()
+                    .id(productDTO.getId())
+                    .productName(productDTO.getProductName())
+                    .amount(productDTO.getAmount())
+                    .account(productDTO.getAmount())
+                    .weight(productDTO.getWeight())
+                    .checkId(productDTO.getCheckId())
+                    .comment(productDTO.getDescription())
                     .build();
             products.add(product);
         }
@@ -57,14 +57,14 @@ public class ProductService implements IProductService {
         List<Product> products = new ArrayList<>();
         List<ProductDTO> productDTOS = productMapper.getProductsByName(productName);
         for (ProductDTO productDTO : productDTOS) {
-            Product product = new Product.Builder()
-                    .setId(productDTO.getId())
-                    .setProductName(productDTO.getProductName())
-                    .setAmount(productDTO.getAmount())
-                    .setAccount(productDTO.getAccount())
-                    .setWeight(productDTO.getWeight())
-                    .setCheckId(productDTO.getCheckId())
-                    .setComment(productDTO.getDescription())
+            Product product = Product.builder()
+                    .id(productDTO.getId())
+                    .productName(productDTO.getProductName())
+                    .amount(productDTO.getAmount())
+                    .account(productDTO.getAmount())
+                    .weight(productDTO.getWeight())
+                    .checkId(productDTO.getCheckId())
+                    .comment(productDTO.getDescription())
                     .build();
             products.add(product);
         }
@@ -75,14 +75,14 @@ public class ProductService implements IProductService {
         List<Product> products = new ArrayList<>();
         List<ProductDTO> productDTOS = productMapper.getProductsByCheckId(checkId);
         for (ProductDTO productDTO : productDTOS) {
-            Product product = new Product.Builder()
-                    .setId(productDTO.getId())
-                    .setProductName(productDTO.getProductName())
-                    .setAmount(productDTO.getAmount())
-                    .setAccount(productDTO.getAccount())
-                    .setWeight(productDTO.getWeight())
-                    .setCheckId(productDTO.getCheckId())
-                    .setComment(productDTO.getDescription())
+            Product product = Product.builder()
+                    .id(productDTO.getId())
+                    .productName(productDTO.getProductName())
+                    .amount(productDTO.getAmount())
+                    .account(productDTO.getAmount())
+                    .weight(productDTO.getWeight())
+                    .checkId(productDTO.getCheckId())
+                    .comment(productDTO.getDescription())
                     .build();
             products.add(product);
         }
@@ -90,14 +90,14 @@ public class ProductService implements IProductService {
     }
     public Product getProductById(Long id) {
         ProductDTO productDTO = productMapper.getProductById(id);
-        return new Product.Builder()
-                .setId(productDTO.getId())
-                .setProductName(productDTO.getProductName())
-                .setAmount(productDTO.getAmount())
-                .setAccount(productDTO.getAccount())
-                .setWeight(productDTO.getWeight())
-                .setCheckId(productDTO.getCheckId())
-                .setComment(productDTO.getDescription())
+        return Product.builder()
+                .id(productDTO.getId())
+                .productName(productDTO.getProductName())
+                .amount(productDTO.getAmount())
+                .account(productDTO.getAmount())
+                .weight(productDTO.getWeight())
+                .checkId(productDTO.getCheckId())
+                .comment(productDTO.getDescription())
                 .build();
     }
     public boolean deleteProduct(Long id){
