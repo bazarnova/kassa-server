@@ -1,5 +1,6 @@
 package com.kassa.service;
 
+import com.kassa.dto.CheckDTO;
 import com.kassa.entity.Check;
 
 import java.util.ArrayList;
@@ -7,9 +8,9 @@ import java.util.List;
 
 public class CheckListWrapper {
 
-    private List<Check> checkList;
+    private List<CheckDTO> checkList;
 
-    public CheckListWrapper(List<Check> checkList) {
+    public CheckListWrapper(List<CheckDTO> checkList) {
         this.checkList = new ArrayList<>(checkList);
     }
 
@@ -17,11 +18,11 @@ public class CheckListWrapper {
         checkList = new ArrayList<>();
     }
 
-    public List<Check> getCheckList() {
+    public List<CheckDTO> getCheckList() {
         return checkList;
     }
 
-    public void setCheckList(List<Check> productList) {
+    public void setCheckList(List<CheckDTO> productList) {
         this.checkList = checkList;
     }
 }

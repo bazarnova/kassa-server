@@ -1,6 +1,6 @@
 package com.kassa.telebot;
 
-import com.kassa.entity.Photo;
+import com.kassa.dto.PhotoDTO;
 import com.kassa.service.IPhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -55,14 +55,14 @@ public class TelegramBot extends TelegramLongPollingBot {
                 String path = "D:\\telebot" + "/" + localDate + "/" + photo.getFileId() + ".jpg";
                 downloadFile(filePath, new File(path));
 
-                Photo newPhoto = Photo.builder()
+                PhotoDTO photoDTO = PhotoDTO.builder()
                         .fileId(photo.getFileId())
                         .messageDate(localDate)
                         .addedDate(LocalDate.now())
                         .processed(false)
                         .path(path)
                         .build();
-                photoService.addPhoto(newPhoto);
+                photoService.addPhoto(photoDTO);
 
             } catch (TelegramApiException e) {
                 throw new RuntimeException(e);

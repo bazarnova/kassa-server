@@ -2,7 +2,7 @@ package com.kassa.service;
 
 import com.kassa.dto.ProductDTO;
 import com.kassa.entity.Product;
-import com.kassa.flyway.ProductMapper;
+import com.kassa.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,95 +13,98 @@ import java.util.List;
 public class ProductService implements IProductService {
 
     @Autowired
-    private ProductMapper productMapper;
+    private ProductRepository productRepository;
 
     @Override
-    public Product addNewProduct(Product product) {
-        ProductDTO productDTO = ProductDTO.builder()
-                .id(product.getId())
-                .productName(product.getProductName())
-                .amount(product.getAmount())
-                .account(product.getAccount())
-                .weight(product.getWeight())
-                .checkId(product.getCheckId())
-                .description(product.getComment())
-                .build();
-
-        productMapper.addProduct(productDTO);
-        product.setId(productDTO.getId());
-        return product;
-    }
-
-    @Override
-    public List<Product> getAllProducts() {
-
-        List<Product> products = new ArrayList<>();
-        List<ProductDTO> productDTOS = productMapper.getAllProducts();
-        for (ProductDTO productDTO : productDTOS) {
-            Product product = Product.builder()
-                    .id(productDTO.getId())
-                    .productName(productDTO.getProductName())
-                    .amount(productDTO.getAmount())
-                    .account(productDTO.getAmount())
-                    .weight(productDTO.getWeight())
-                    .checkId(productDTO.getCheckId())
-                    .comment(productDTO.getDescription())
-                    .build();
-            products.add(product);
-        }
-        return products;
-    }
-    @Override
-    public List<Product> getProductsByName(String productName) {
-
-        List<Product> products = new ArrayList<>();
-        List<ProductDTO> productDTOS = productMapper.getProductsByName(productName);
-        for (ProductDTO productDTO : productDTOS) {
-            Product product = Product.builder()
-                    .id(productDTO.getId())
-                    .productName(productDTO.getProductName())
-                    .amount(productDTO.getAmount())
-                    .account(productDTO.getAmount())
-                    .weight(productDTO.getWeight())
-                    .checkId(productDTO.getCheckId())
-                    .comment(productDTO.getDescription())
-                    .build();
-            products.add(product);
-        }
-        return products;
-    }
-
-    public List<Product> getProductsByCheckId(Long checkId){
-        List<Product> products = new ArrayList<>();
-        List<ProductDTO> productDTOS = productMapper.getProductsByCheckId(checkId);
-        for (ProductDTO productDTO : productDTOS) {
-            Product product = Product.builder()
-                    .id(productDTO.getId())
-                    .productName(productDTO.getProductName())
-                    .amount(productDTO.getAmount())
-                    .account(productDTO.getAmount())
-                    .weight(productDTO.getWeight())
-                    .checkId(productDTO.getCheckId())
-                    .comment(productDTO.getDescription())
-                    .build();
-            products.add(product);
-        }
-        return products;
-    }
-    public Product getProductById(Long id) {
-        ProductDTO productDTO = productMapper.getProductById(id);
-        return Product.builder()
+    public ProductDTO addNewProduct(ProductDTO productDTO) {
+        Product product = Product.builder()
                 .id(productDTO.getId())
                 .productName(productDTO.getProductName())
                 .amount(productDTO.getAmount())
-                .account(productDTO.getAmount())
+                .account(productDTO.getAccount())
                 .weight(productDTO.getWeight())
                 .checkId(productDTO.getCheckId())
-                .comment(productDTO.getDescription())
+                .comment(productDTO.getComment())
+                .build();
+
+        productRepository.save(product);
+        productDTO.setId(product.getId());
+        return productDTO;
+    }
+
+    @Override
+    public List<ProductDTO> getAllProducts() {
+
+        List<ProductDTO> productDTOs = new ArrayList<>();
+        List<Product> products = productRepository.findAll();
+        for (Product product : products) {
+            ProductDTO productDTO = ProductDTO.builder()
+                    .id(product.getId())
+                    .productName(product.getProductName())
+                    .amount(product.getAmount())
+                    .account(product.getAmount())
+                    .weight(product.getWeight())
+                    .checkId(product.getCheckId())
+                    .comment(product.getComment())
+                    .build();
+            productDTOs.add(productDTO);
+        }
+        return productDTOs;
+    }
+
+    @Override
+    public List<ProductDTO> getProductsByName(String productName) {
+
+        List<ProductDTO> productDTOs = new ArrayList<>();
+        List<Product> products = productRepository.findProductByProductName(productName);
+        for (Product product : products) {
+            ProductDTO productDTO = ProductDTO.builder()
+                    .id(product.getId())
+                    .productName(product.getProductName())
+                    .amount(product.getAmount())
+                    .account(product.getAmount())
+                    .weight(product.getWeight())
+                    .checkId(product.getCheckId())
+                    .comment(product.getComment())
+                    .build();
+            productDTOs.add(productDTO);
+        }
+        return productDTOs;
+    }
+
+    public List<ProductDTO> getProductsByCheckId(Long checkId) {
+        List<ProductDTO> productDTOs = new ArrayList<>();
+        List<Product> products = productRepository.getProductByCheck_Id(checkId);
+        for (Product product : products) {
+            ProductDTO productDTO = ProductDTO.builder()
+                    .id(product.getId())
+                    .productName(product.getProductName())
+                    .amount(product.getAmount())
+                    .account(product.getAmount())
+                    .weight(product.getWeight())
+                    .checkId(product.getCheckId())
+                    .comment(product.getComment())
+                    .build();
+            productDTOs.add(productDTO);
+        }
+        return productDTOs;
+    }
+
+    public ProductDTO getProductById(Long id) {
+        Product product = productRepository.getProductById(id);
+        return ProductDTO.builder()
+                .id(product.getId())
+                .productName(product.getProductName())
+                .amount(product.getAmount())
+                .account(product.getAmount())
+                .weight(product.getWeight())
+                .checkId(product.getCheckId())
+                .comment(product.getComment())
                 .build();
     }
-    public boolean deleteProduct(Long id){
-        int number = productMapper.deleteProduct(id);
+
+    public boolean deleteProduct(Long id) {
+        int number = productRepository.deleteProductById(id);
         return number > 0;
     }
 }

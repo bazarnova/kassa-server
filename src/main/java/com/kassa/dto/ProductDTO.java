@@ -16,5 +16,5 @@ public class ProductDTO {
     private Integer account;
     private BigDecimal weight;
     private Long checkId;
-    private String description;
+    private String comment;
 }

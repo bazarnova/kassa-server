@@ -1,5 +1,6 @@
 package com.kassa.controller;
 
+import com.kassa.dto.PhotoDTO;
 import com.kassa.entity.Check;
 import com.kassa.entity.Photo;
 import com.kassa.service.CheckListWrapper;
@@ -30,7 +31,7 @@ public class PhotoController {
 
     @GetMapping(value = "/photos")
     @ResponseBody
-    public List<Photo> photoList() {
+    public List<PhotoDTO> photoList() {
         return photoService.getNotProcessedPhotos();
     }
 

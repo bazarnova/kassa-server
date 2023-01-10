@@ -1,10 +1,11 @@
 package com.kassa.service;
 
+import com.kassa.dto.PhotoDTO;
 import com.kassa.entity.Photo;
 
 import java.util.List;
 
 public interface IPhotoService {
-    Photo addPhoto(Photo photo);
-    List<Photo> getNotProcessedPhotos();
+    PhotoDTO addPhoto(PhotoDTO photoDTO);
+    List<PhotoDTO> getNotProcessedPhotos();
 }

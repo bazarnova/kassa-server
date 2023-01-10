@@ -2,7 +2,7 @@ package com.kassa.service;
 
 import com.kassa.dto.CheckDTO;
 import com.kassa.entity.Check;
-import com.kassa.flyway.CheckMapper;
+import com.kassa.repository.CheckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,57 +14,56 @@ import java.util.List;
 public class CheckService implements ICheckService {
 
     @Autowired
-    private CheckMapper checkMapper;
+    private CheckRepository checkRepository;
 
     @Override
-    public Check addNewCheck(Check check) {
+    public CheckDTO addNewCheck(CheckDTO checkDTO) {
 
-        CheckDTO checkDTO = CheckDTO.builder()
-                .date(check.getDate())
-                .sumAmount(check.getSumAmount())
-                .shopName(check.getShopName())
-                .comment(check.getComment())
+        Check check = Check.builder()
+                .date(checkDTO.getDate())
+                .sumAmount(checkDTO.getSumAmount())
+                .shopName(checkDTO.getShopName())
+                .comment(checkDTO.getComment())
                 .build();
 
-        checkMapper.addCheck(checkDTO);
-        check.setId(checkDTO.getId());
-        return check;
+        checkRepository.save(check);
+        checkDTO.setId(check.getId());
+        return checkDTO;
     }
 
     @Override
-    public List<Check> getAllChecks() {
+    public List<CheckDTO> getAllChecks() {
 
-        List<Check> checks = new ArrayList<>();
-        List<CheckDTO> checkDTOS = checkMapper.getAllChecks();
-        for (CheckDTO checkDTO : checkDTOS) {
-            LocalDate date = checkDTO.getDate() == null ? null : checkDTO.getDate();
-            Check check = Check.builder()
-                    .id(checkDTO.getId())
-                    .date(date)
-                    .sumAmount(checkDTO.getSumAmount())
-                    .shopName(checkDTO.getShopName())
-                    .comment(checkDTO.getComment())
+        List<CheckDTO> checkDTOs = new ArrayList<>();
+        List<Check> checks = checkRepository.findAll();
+        for (Check check : checks) {
+            CheckDTO checkDTO = CheckDTO.builder()
+                    .id(check.getId())
+                    .date(check.getDate())
+                    .sumAmount(check.getSumAmount())
+                    .shopName(check.getShopName())
+                    .comment(check.getComment())
                     .build();
-            checks.add(check);
+            checkDTOs.add(checkDTO);
         }
-        return checks;
+        return checkDTOs;
     }
 
     @Override
-    public List<Check> getChecksByDate(LocalDate date) {
+    public List<CheckDTO> getChecksByDate(LocalDate date) {
 
-        List<Check> checks = new ArrayList<>();
-        List<CheckDTO> checkDTOS = checkMapper.getChecksByDate(date);
-        for (CheckDTO checkDTO : checkDTOS) {
-            Check check = Check.builder()
-                    .id(checkDTO.getId())
-                    .date(checkDTO.getDate())
-                    .sumAmount(checkDTO.getSumAmount())
-                    .shopName(checkDTO.getShopName())
-                    .comment(checkDTO.getComment())
+        List<CheckDTO> checkDTOs = new ArrayList<>();
+        List<Check> checks = checkRepository.getChecksByDate(date);
+        for (Check check : checks) {
+            CheckDTO checkDTO = CheckDTO.builder()
+                    .id(check.getId())
+                    .date(check.getDate())
+                    .sumAmount(check.getSumAmount())
+                    .shopName(check.getShopName())
+                    .comment(check.getComment())
                     .build();
-            checks.add(check);
+            checkDTOs.add(checkDTO);
         }
-        return checks;
+        return checkDTOs;
     }
 }

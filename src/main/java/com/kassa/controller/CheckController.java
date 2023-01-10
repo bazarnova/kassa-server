@@ -1,8 +1,8 @@
 package com.kassa.controller;
 
-import com.kassa.entity.Check;
+import com.kassa.dto.CheckDTO;
 import com.kassa.service.CheckListWrapper;
-import com.kassa.service.ICheckService;
+import com.kassa.service.CheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -20,15 +20,16 @@ public class CheckController {
     @Autowired
     ApplicationContext applicationContext;
 
-    private final ICheckService checkService;
+    @Autowired
+    private CheckService checkService;
 
-    public CheckController(ICheckService checkService) {
+    public CheckController(CheckService checkService) {
         this.checkService = checkService;
     }
 
     @GetMapping(value = "/checks")
     @ResponseBody
-    public List<Check> checkList() {
+    public List<CheckDTO> checkList() {
         return checkService.getAllChecks();
     }
 
@@ -42,8 +43,8 @@ public class CheckController {
     @PostMapping(value = "/check",
             consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Check addCheck(@RequestBody Check check) {
-        return  checkService.addNewCheck(check);
+    public CheckDTO addCheck(@RequestBody CheckDTO checkDTO) {
+        return  checkService.addNewCheck(checkDTO);
     }
 
 }
